@@ -1,0 +1,118 @@
+{% schema %}
+{
+  "name": "Cart",
+  "class": "cc-main-cart section section--template",
+  "blocks": [
+    // TODO: add block to the section
+    {
+      "type": "precheckout",
+      "name": "Precheckout",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "isVoucherEnabled",
+          "label": "Habilitar Boleta (personas)"
+        },
+        {
+          "type": "checkbox",
+          "id": "isBillingEnabled",
+          "label": "Habilitar Factura (empresas)"
+        },
+        {
+          "type": "checkbox",
+          "id": "isShippingEnabled",
+          "label": "Habilitar datos de envio"
+        },
+        {
+          "type": "checkbox",
+          "id": "isShippingCostEnabled",
+          "label": "Habilitar costos de envio"
+        },
+        {
+          "type": "color",
+          "id": "backgroundColor",
+          "label": "Color de fondo",
+          "default": "#CECECE"
+        },
+        {
+          "type": "color",
+          "id": "labelColor",
+          "label": "Color de texto",
+          "default": "#000000"
+        },
+        {
+          "type": "text",
+          "id": "ticketDataTitle",
+          "label": "Título boleta",
+          "default": "Datos para boleta"
+        },
+        {
+          "type": "text",
+          "id": "billingDataTitle",
+          "label": "Título facturación",
+          "default": "Datos para facturación"
+        },
+        {
+          "type": "text",
+          "id": "shippingTitle",
+          "label": "Título direccion envío",
+          "default": "Datos de envío"
+        },
+        {
+          "type": "text",
+          "id": "rutLabel",
+          "label": "Titulo Rut",
+          "default": "Rut"
+        },
+        {
+          "type": "text",
+          "id": "rutLabelSmall",
+          "label": "subtitulo Rut"
+        },
+        {
+          "type": "text",
+          "id": "rutPlaceHolder",
+          "label": "PlaceHolder Rut",
+          "default": "Ingresa tu Rut"
+        },
+        {
+          "type": "text",
+          "id": "razonLabel",
+          "label": "Titulo Razón social",
+          "default": "Razón social"
+        },
+        {
+          "type": "text",
+          "id": "razonLabelSmall",
+          "label": "subtitulo razon social"
+        },
+        {
+          "type": "text",
+          "id": "razonPlaceHolder",
+          "label": "PlaceHolder Razón social",
+          "default": "Ingresa tu Razón social"
+        },
+        {
+          "type": "text",
+          "id": "giroLabel",
+          "label": "Titulo Giro",
+          "default": "Giro"
+        },
+        {
+          "type": "text",
+          "id": "giroLabelSmall",
+          "label": "subtitulo giro"
+        },
+        {
+          "type": "text",
+          "id": "giroPlaceHolder",
+          "label": "PlaceHolder Giro",
+          "default": "Ingresa tu giro"
+        }
+      ]
+    }
+  ]
+  // /
+}
+{% endschema %}

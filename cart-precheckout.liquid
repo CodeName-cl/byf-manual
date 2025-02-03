@@ -1,0 +1,437 @@
+{%- assign showBillingMenu = false -%}
+{%- if isBillingEnabled and isVoucherEnabled != true -%}
+{%- assign showBillingMenu = true -%}
+{%- endif -%}
+
+
+<div style="clear:both"></div>
+<!-- Preceheckout -->
+<div class="pre-check">
+  <div class="factura">
+
+    {%- if isBillingEnabled and isVoucherEnabled -%}
+    <div class="cart-document-type">
+      <h5>Tipo de documento</h5>
+      <span class="cart__subtotal">
+        <input required="" id="btn-boleta" class="styled-checkbox required btn-boleta document-type-selector"
+          type="radio" name="attributes[shoppingcart-tags]" value="boleta" checked="checked">
+        <label for="btn-boleta" class="cart-boleta">Boleta</label>
+        <input required="" id="btn-factura" class="styled-checkbox required btn-factura document-type-selector"
+          type="radio" name="attributes[shoppingcart-tags]" value="factura">
+        <label for="btn-factura" class="cart-factura">Factura</label>
+      </span>
+    </div>
+    {%- endif -%}
+
+    <div class="billing-menu">
+      <h5>{{ billingDataTitle }}</h5>
+      <p class="cart-attribute__field">
+        <label class="rut-field" for="rut">{{ rutLabel }} <small>{{ rutLabelSmall }}</small></label>
+        <input id="rut" type="text" name="attributes[RUT]" placeholder="{{ rutPlaceHolder }}" value="">
+      </p>
+      <p class="cart-attribute__field cart-attribute__field-razon">
+        <label class="razon-field" for="razon">{{ razonLabel }} <small>{{ razonLabelSmall }}</small></label>
+        <input id="razon" type="text" name="attributes[razon]" placeholder="{{ razonPlaceHolder }}" value="">
+      </p>
+      <p class="cart-attribute__field cart-attribute__field-razon">
+        <label class="razon-field" for="razon">{{ giroLabel }} <small>{{ giroLabelSmall }}</small></label>
+        <input id="razon" type="text" name="attributes[giro]" placeholder="{{ giroPlaceHolder }}" value="">
+      </p>
+    </div>
+  </div>
+
+  <div class="comunas">
+    <h5>Dirección de envío</h5>
+    <p class="alert">
+      Debes seleccionar tu comuna para continuar
+    </p>
+    <div class="town-selector-modal">
+      <div class="town-selector-modal-content">
+        <p class="cart-attribute__field">
+          <label for="city">Región</label>
+          <select id="select-city" name="[shipping_address][city]">
+            <option value="">Selecciona tu Región</option>
+            <option value="AP">Arica y Parinacota</option>
+            <option value="TA">Tarapacá</option>
+            <option value="AN">Antofagasta</option>
+            <option value="AT">Atacama</option>
+            <option value="CO">Coquimbo</option>
+            <option value="VS">Valparaí&shy;so</option>
+            <option value="RM">Región Metropolitana</option>
+            <option value="LI">O'Higgins</option>
+            <option value="ML">Maule</option>
+            <option value="NB">Ñuble</option>
+            <option value="BI">Biobio</option>
+            <option value="AR">Araucanía</option>
+            <option value="LR">Los Rí&shy;os</option>
+            <option value="LL">Los Lagos</option>
+            <option value="AI">Aysén</option>
+            <option value="MA">Magallanes</option>
+          </select>
+        </p>
+        <p class="cart-attribute__field">
+          <label for="town">Comuna</label>
+          <select id="select-town" name="[shipping_address][province]">
+            <option value="">Selecciona tu Comuna</option>
+          </select>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shipping_costs">
+    <p>Costos de despacho:</p>
+    <p class="shipping_costs_wrapper"></p>
+  </div>
+
+  <div class="tos">
+    <p class="cart-attribute__field">
+      <label for="city"><input type="checkbox" required> Estoy de acuerdo con los Términos y condiciones <a
+          href="/pages/politicas-de-envio" target="_blank">Mostrar Términos</a></label>
+    </p>
+  </div>
+
+  <!--
+    <div class="submit">
+        <button
+                type="submit"
+                class="button-primary mdc-ripple-surface mdc-ripple-upgraded"
+                id="checkout"
+                name="checkout"
+                value="PAGAR"
+                style="font-size: larger;width: 100%;"
+		>
+            <span class="icon " data-icon="lock">
+                <svg width="25" height="24" viewBox="0 0 25 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">      <path fill-rule="evenodd" clip-rule="evenodd" d="M1 0C0.447715 0 0 0.447715 0 1C0 1.55228 0.447715 2 1 2H1.33877H1.33883C1.61048 2.00005 2.00378 2.23945 2.10939 2.81599L2.10937 2.816L2.11046 2.82171L5.01743 18.1859C5.12011 18.7286 5.64325 19.0852 6.18591 18.9826C6.21078 18.9779 6.23526 18.9723 6.25933 18.9658C6.28646 18.968 6.31389 18.9692 6.34159 18.9692H18.8179H18.8181C19.0302 18.9691 19.2141 18.9765 19.4075 18.9842L19.4077 18.9842C19.5113 18.9884 19.6175 18.9926 19.7323 18.9959C20.0255 19.0043 20.3767 19.0061 20.7177 18.9406C21.08 18.871 21.4685 18.7189 21.8028 18.3961C22.1291 18.081 22.3266 17.6772 22.4479 17.2384C22.4569 17.2058 22.4642 17.1729 22.4699 17.1396L23.944 8.46865C24.2528 7.20993 23.2684 5.99987 21.9896 6H21.9894H4.74727L4.07666 2.45562L4.07608 2.4525C3.83133 1.12381 2.76159 8.49962e-05 1.33889 0H1.33883H1ZM5.12568 8L6.8227 16.9692H18.8178H18.8179C19.0686 16.9691 19.3257 16.9793 19.5406 16.9877L19.5413 16.9877C19.633 16.9913 19.7171 16.9947 19.7896 16.9967C20.0684 17.0047 20.2307 16.9976 20.3403 16.9766C20.3841 16.9681 20.4059 16.96 20.4151 16.9556C20.4247 16.9443 20.4639 16.8918 20.5077 16.7487L21.9794 8.09186C21.9842 8.06359 21.9902 8.03555 21.9974 8.0078C21.9941 8.00358 21.9908 8.00108 21.989 8H5.12568ZM20.416 16.9552C20.4195 16.9534 20.4208 16.9524 20.4205 16.9523C20.4204 16.9523 20.4199 16.9525 20.4191 16.953L20.416 16.9552ZM10.8666 22.4326C10.8666 23.2982 10.195 24 9.36658 24C8.53815 24 7.86658 23.2982 7.86658 22.4326C7.86658 21.567 8.53815 20.8653 9.36658 20.8653C10.195 20.8653 10.8666 21.567 10.8666 22.4326ZM18.0048 24C18.8332 24 19.5048 23.2982 19.5048 22.4326C19.5048 21.567 18.8332 20.8653 18.0048 20.8653C17.1763 20.8653 16.5048 21.567 16.5048 22.4326C16.5048 23.2982 17.1763 24 18.0048 24Z" fill="currentColor"></path>    </svg>
+            </span>
+            PAGAR
+        </button>
+    </div>
+	-->
+  <!--
+<div class="arauco-disponible">
+<p>Debes eliminar los productos marcados con rojo para continuar</p>
+</div>
+<div class="aprox">
+<div class="tag-CN">
+    <p class="des-santiago"><em><strong>Tiempo de despacho:</strong> 3 a 5 días (hábiles)</em></p>
+    <p class="des-regiones"><em><strong>Tiempo de despacho:</strong> 5 a 8 días (hábiles)</em></p>
+    <p class="des-extremas"><em><strong>Tiempo de despacho:</strong> 7 a 10 días (hábiles)</em></p>
+    <p class="des-magallanes"><em><strong>Tiempo de despacho máximo:</strong> hasta 20 días (hábiles)</em></p>
+</div>
+</div>
+-->
+</div>
+<!-- Precheckout -->
+
+
+<style>
+  .cart__subtotal-title {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .cart__subtotal {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .billing-menu {
+    display: {%- if showBillingMenu -%}block {%- else -%}none {%- endif -%};
+  }
+
+  .rut-field,
+  .razon-field {
+    color: #3d4246;
+    font-size: 16px;
+  }
+
+  .razon-field {
+    padding-right: 230px;
+  }
+
+  .cart-boleta {
+    margin-right: 8.7px;
+  }
+
+  .cart-document-type {}
+
+  .doc-type {
+    float: left;
+    width: calc(100% - 154px);
+  }
+
+  .comunas {
+    margin-top: 10px;
+  }
+
+  .pre-check {
+    padding: 20px;
+    background: #eee;
+    /* float: right;
+        width: 25%; */
+    margin-bottom: 50px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .pre-check {
+      float: none;
+      width: 100%;
+      order: 2;
+    }
+
+    .cart__form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .cart-attribute__field {
+    margin-top: 5px;
+  }
+
+  .cart-attribute__field select,
+  .cart-attribute__field input[type=text] {
+    width: 100%;
+    padding: 5px;
+    border: #ccc solid 1px;
+    border-radius: 0px;
+  }
+
+  .alert {
+    display: none;
+  }
+
+  .invalido {
+    border: red solid 1px !important;
+  }
+
+  .invalido:focus-visible {
+    outline: none;
+  }
+
+  .submit {
+    margin-top: 10px;
+  }
+
+  .add_to_cart_precheckout {
+    width: 100%;
+    padding: 20px;
+    background: black;
+    color: white;
+  }
+
+  .add_to_cart_precheckout .icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 5px !important;
+  }
+
+  .tos {
+    margin-top: 10px;
+  }
+
+  @media only screen and (max-width: 749px) {
+    .cart-boleta {
+      margin-right: 35.7px;
+    }
+
+    .rut-field,
+    .razon-field {
+      text-align: left;
+    }
+
+    #rut,
+    #razon {
+      width: 100%;
+    }
+  }
+</style>
+<script type="text/javascript">
+  setTimeout(function () {
+    var actions = {
+      "factura": function () {
+        $(".billing-menu").css("display", "block");
+      },
+      "boleta": function () {
+        $(".billing-menu").css("display", "none");
+      }
+    }
+    $(".document-type-selector").on("change", function () {
+      actions[$(this).val()]();
+    });
+  }, 500);
+
+  const dom_rut = document.getElementById("rut");
+
+  dom_rut.addEventListener(
+    'input', function () {
+      var valor = rut.value.replace('.', '');
+      valor = valor.replace('-', '');
+      cuerpo = valor.slice(0, -1);
+      dv = valor.slice(-1).toUpperCase();
+      rut.value = cuerpo + '-' + dv
+
+      if (cuerpo.length < 7) {
+        dom_rut.classList.add("invalido");
+        dom_rut.classList.remove("valido");
+        rut.setCustomValidity("RUT Incompleto"); return false;
+      } else {
+        dom_rut.classList.add("valido");
+        dom_rut.classList.remove("invalido");
+      }
+
+      suma = 0;
+      multiplo = 2;
+
+      for (i = 1; i <= cuerpo.length; i++) {
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        suma = suma + index;
+        if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+      }
+
+      dvEsperado = 11 - (suma % 11);
+
+      dv = (dv == 'K') ? 10 : dv;
+      dv = (dv == 0) ? 11 : dv;
+
+      // Validar que el Cuerpo coincide con su Dígito Verificador
+      if (dvEsperado != dv) {
+        dom_rut.classList.add("invalido");
+        dom_rut.classList.remove("valido");
+        rut.setCustomValidity("RUT Inválido"); return false;
+      } else {
+        dom_rut.classList.add("valido");
+        dom_rut.classList.remove("invalido");
+      }
+      // Si todo sale bien, eliminar errores (decretar que es válido)
+      rut.setCustomValidity('');
+    });
+
+</script>
+
+
+
+<script type="text/javascript">
+  setTimeout(function () {
+    var true_town = false;
+    // selector de regiones
+    var cities = {
+      "AP": "Arica y Parinacota",
+      "TA": "Tarapacá",
+      "AN": "Antofagasta",
+      "AT": "Atacama",
+      "CO": "Coquimbo",
+      "VS": "Valparaí&shy;so",
+      "RM": "Región Metropolitana",
+      "LI": "O'Higgins",
+      "ML": "Maule",
+      "NB": "Ñuble",
+      "BI": "Biobio",
+      "AR": "Araucanía",
+      "LR": "Los Rí&shy;os",
+      "LL": "Los Lagos",
+      "AI": "Aysén",
+      "MA": "Magallanes"
+    };
+    // selector de comunas
+    var towns = comunas = {
+      "AN": ["Antofagasta", "Calama", "María Elena", "Mejillones", "Ollagüe", "San Pedro de Atacama", "Sierra Gorda", "Taltal", "Tocopilla"],
+      "AR": ["Angol", "Carahue", "Cholchol", "Collipulli", "Cunco", "Curacautín", "Curarrehue", "Ercilla", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Lonquimay", "Los Sauces", "Lumaco", "Melipeuco", "Nueva Imperial", "Padre las Casas", "Perquenco", "Pitrufquén", "Pucón", "Purén", "Renaico", "Saavedra", "Temuco", "Teodoro Schmidt", "Toltén", "Traiguén", "Victoria", "Vilcún", "Villarrica"],
+      "AP": ["Arica", "Camarones", "General Lagos", "Putre"],
+      "AT": ["Alto del Carmen", "Caldera", "Chañaral", "Copiapó", "Diego de Almagro", "Freirina", "Huasco", "Tierra Amarilla", "Vallenar"],
+      "AI": ["Aisén", "Chile Chico", "Cisnes", "Cochrane", "Coihaique", "Guaitecas", "Lago Verde", "O’Higgins", "Río Ibáñez", "Tortel"],
+      "BI": ["Alto Biobío", "Antuco", "Arauco", "Cabrero", "Cañete", "Chiguayante", "Concepción", "Contulmo", "Coronel", "Curanilahue", "Florida", "Hualpén", "Hualqui", "Laja", "Lebu", "Los Álamos", "Los Ángeles", "Lota", "Mulchén", "Nacimiento", "Negrete", "Penco", "Quilaco", "Quilleco", "San Pedro de la Paz", "San Rosendo", "Santa Bárbara", "Santa Juana", "Talcahuano", "Tirúa", "Tomé", "Tucapel", "Yumbel"],
+      "CO": ["Andacollo", "Canela", "Combarbalá", "Coquimbo", "Illapel", "La Higuera", "La Serena", "Los Vilos", "Monte Patria", "Ovalle", "Paihuano", "Punitaqui", "Río Hurtado", "Salamanca", "Vicuña"],
+      "LL": ["Ancud", "Calbuco", "Castro", "Chaitén", "Chonchi", "Cochamó", "Curaco de Vélez", "Dalcahue", "Fresia", "Frutillar", "Futaleufú", "Hualaihué", "Llanquihue", "Los Muermos", "Maullín", "Osorno", "Palena", "Puerto Montt", "Puerto Octay", "Puerto Varas", "Puqueldón", "Purranque", "Puyehue", "Queilén", "Quellón", "Quemchi", "Quinchao", "Río Negro", "San Juan de la Costa", "San Pablo"],
+      "LR": ["Corral", "Futrono", "La Unión", "Lago Ranco", "Lanco", "Los Lagos", "Mariquina", "Máfil", "Paillaco", "Panguipulli", "Río Bueno", "Valdivia"],
+      "MA": ["Antártica", "Cabo de Hornos (Ex Navarino)", "Laguna Blanca", "Natales", "Porvenir", "Primavera", "Punta Arenas", "Río Verde", "San Gregorio", "Timaukel", "Torres del Paine"],
+      "ML": ["Cauquenes", "Chanco", "Colbún", "Constitución", "Curepto", "Curicó", "Empedrado", "Hualañé", "Licantén", "Linares", "Longaví", "Maule", "Molina", "Parral", "Pelarco", "Pelluhue", "Pencahue", "Rauco", "Retiro", "Romeral", "Río Claro", "Sagrada Familia", "San Clemente", "San Javier", "San Rafael", "Talca", "Teno", "Vichuquén", "Villa Alegre", "Yerbas Buenas"],
+      "NB": ["Bulnes", "Chillán", "Chillán Viejo", "Cobquecura", "Coelemu", "Coihueco", "El Carmen", "Ninhue", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay", "Ñiquén"],
+      "LI": ["Chimbarongo", "Chépica", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "La Estrella", "Las Cabras", "Litueche", "Lolol", "Machalí", "Malloa", "Marchihue", "Mostazal", "Nancagua", "Navidad", "Olivar", "Palmilla", "Paredones", "Peralillo", "Peumo", "Pichidegua", "Pichilemu", "Placilla", "Pumanque", "Quinta de Tilcoco", "Rancagua", "Rengo", "Requínoa", "San Fernando", "San Vicente", "Santa Cruz"],
+      "RM": ["Alhué", "Buin", "Calera de Tango", "Cerrillos", "Cerro Navia", "Colina", "Conchalí", "Curacaví", "El Bosque", "El Monte", "Estación Central", "Huechuraba", "Independencia", "Isla de Maipo", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Lampa", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "María Pinto", "Melipilla", "Padre Hurtado", "Paine", "Pedro Aguirre Cerda", "Peñaflor", "Peñalolén", "Pirque", "Providencia", "Pudahuel", "Puente Alto", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Bernardo", "San Joaquín", "San José de Maipo", "San Miguel", "San Pedro", "San Ramón", "Santiago", "Talagante", "Tiltil", "Vitacura", "Ñuñoa"],
+      "TA": ["Alto Hospicio", "Camiña", "Colchane", "Huara", "Iquique", "Pica", "Pozo Almonte"],
+      "VS": ["Algarrobo", "Cabildo", "Calera", "Calle Larga", "Cartagena", "Casablanca", "Catemu", "Concón", "El Quisco", "El Tabo", "Hijuelas", "Isla de Pascua", "Juan Fernández", "La Cruz", "La Ligua", "Limache", "Llaillay", "Los Andes", "Nogales", "Olmué", "Panquehue", "Papudo", "Petorca", "Puchuncaví", "Putaendo", "Quillota", "Quilpué", "Quintero", "Rinconada", "San Antonio", "San Esteban", "San Felipe", "Santa María", "Santo Domingo", "Valparaíso", "Villa Alemana", "Viña del Mar", "Zapallar"]
+    };
+    $("#select-city").append("<option value=''>Selecciona tu Región</option>");
+    $("#select-town").html("<option value=''>Selecciona tu Comuna</option>");
+
+
+    const showShippingCosts = function () {
+      $.get(
+        "/cart/shipping_rates.json?shipping_address[country]=Chile&shipping_address[province]="
+        + $("#select-city").val()
+        + "&shipping_address[city]="
+        + $("#select-town").val()
+        + "&shipping_address[zip]=RATE",
+        function (data) {
+          const html = [];
+
+          for (const index in data.shipping_rates) {
+            const shipping_rate = data.shipping_rates[index];
+            html.push("<p>" + shipping_rate.presentment_name + ": $" + shipping_rate.price + "</p>");
+          }
+
+          $(".shipping_costs_wrapper").html(html.join(""));
+        });
+    }
+
+    // populate cities
+    Object.keys(cities).forEach(function (item) {
+      $("#select-city").append(
+        "<option value='" + item + "' >" + cities[item] + "</option>"
+      );
+    });
+
+
+    $("#select-city").on("change", function () {
+      populateTowns($(this).val());
+    });
+
+    $("#select-town, #select-city").on(
+      "change", function () {
+        showShippingCosts();
+        $("form.cart").attr(
+          "action",
+          "/cart?step=contact_information&checkout[shipping_address][country]=CL&checkout[shipping_address][province]="
+          + $("#select-city").val()
+          + "&checkout[shipping_address][city]="
+          + $("#select-town").val()
+        );
+      });
+
+    $('input[type="submit"]').click(function (evt) {
+      true_town = $("." + evt.target.className).data("true-town");
+    });
+
+    function populateTowns(city_code) {
+      $('#select-town').find('option').remove();
+      towns[city_code].forEach(function (item) {
+        $("#select-town").append(
+          "<option value='" + item + "' >" + item + "</option>"
+        );
+      });
+    }
+
+    // Carrito
+    $('.botones .not').click(function () {
+      $('.comunas select').removeClass('verde');
+      $('.comunas select').addClass('rojo');
+      $('.comunas .alert').show(100);
+    });
+
+  }, 500);
+
+  // add loading
+  const checkout_button = document.getElementById("checkout");
+  const old_text = checkout_button.innerHTML;
+  checkout_button.onclick = function () {
+    checkout_button.innerText = "Redireccionando...";
+    setTimeout(function () {
+      checkout_button.innerHTML = old_text;
+    }, 5000);
+  }
+
+</script>

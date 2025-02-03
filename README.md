@@ -1,4 +1,4 @@
-# **Instalación de Precheckout en TKA**
+# **Instalación de Precheckout**
 
 Sigue estos pasos para integrar la funcionalidad de precheckout en tu tienda.
 
@@ -6,8 +6,8 @@ Sigue estos pasos para integrar la funcionalidad de precheckout en tu tienda.
 
 ## **Pasos de Instalación**
 
-### 1. Acceder a Partners de TKA
-1. Inicia sesión en tu cuenta de **TKA Partners**.
+### 1. Acceder a Partners
+1. Inicia sesión en tu cuenta de **Partners**.
 2. Navega hasta el panel de control de la **tienda del cliente**.
 
 ### 2. Duplicar el Tema Actual
@@ -58,4 +58,4 @@ Sigue estos pasos para integrar la funcionalidad de precheckout en tu tienda.
 ## **Notas Importantes**
 ✅ Realiza pruebas en un entorno de staging antes de publicar.
 📁 Si no encuentras los archivos, consulta la documentación de tu tema.
-🔧 Soporte técnico: contact@tka.com.
+🔧 Soporte técnico: contacto@codename.cl.

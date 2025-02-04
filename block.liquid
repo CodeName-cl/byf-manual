@@ -10,6 +10,10 @@
       "limit": 1,
       "settings": [
         {
+          "type": "header",
+          "content": "Habilitar/Deshabilitar Funcionalidades"
+        },
+        {
           "type": "checkbox",
           "id": "isVoucherEnabled",
           "label": "Habilitar Boleta (personas)"
@@ -30,16 +34,13 @@
           "label": "Habilitar costos de envio"
         },
         {
-          "type": "color",
-          "id": "backgroundColor",
-          "label": "Color de fondo",
-          "default": "#CECECE"
+          "type": "checkbox",
+          "id": "isTosEnabled",
+          "label": "Habilitar Terminos del Servicio"
         },
         {
-          "type": "color",
-          "id": "labelColor",
-          "label": "Color de texto",
-          "default": "#000000"
+          "type": "header",
+          "content": "Textos"
         },
         {
           "type": "text",
@@ -109,6 +110,78 @@
           "id": "giroPlaceHolder",
           "label": "PlaceHolder Giro",
           "default": "Ingresa tu giro"
+        },
+        {
+          "type": "header",
+          "content": "Estilos"
+        },
+        {
+          "type": "color",
+          "id": "backgroundColor",
+          "label": "Color de fondo",
+          "default": "#CECECE"
+        },
+        {
+          "type": "color",
+          "id": "labelColor",
+          "label": "Color de texto",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "inputTextColor",
+          "default" : "#000000",
+          "label": "Color del texto del input"
+        },
+        {
+          "type": "color",
+          "id": "inputPlaceHolderTextColor",
+          "default" : "#000000",
+          "label": "Color del placeholder del texto del input"
+        },
+        {
+          "type": "text",
+          "id": "inputPadding",
+          "default": "5px",
+          "label": "Espacio interior del input"
+        },
+        {
+          "type": "text",
+          "id": "labelMarginTop",
+          "default": "5px",
+          "label": "Espacio antes del título"
+        },
+        {
+          "type": "text",
+          "id": "labelMarginBottom",
+          "default": "5px",
+          "label": "Espacio despues del titulo"
+        },
+        {
+          "type": "text",
+          "id": "inputMargin",
+          "default": "5px 0px",
+          "label": "Espacio entre inputs"
+        },
+        {
+          "type": "text",
+          "id": "radioButtonHeight",
+          "default": "18px",
+          "label": "Ancho de botones de boleta/factura"
+        },
+        {
+          "type": "text",
+          "id": "radioButtonWidth",
+          "default": "18px",
+          "label": "Alto de botones de boleta/factura"
+        },
+        {
+          "type": "range",
+          "id": "inputBorderRadius",
+          "label": "Alto de botones de boleta/factura",
+          "min": 0,
+          "max": 100,
+          "default": 5
         }
       ]
     }

@@ -40,56 +40,62 @@
     </div>
   </div>
 
-  <div class="comunas">
-    <h5>Dirección de envío</h5>
-    <p class="alert">
-      Debes seleccionar tu comuna para continuar
-    </p>
-    <div class="town-selector-modal">
-      <div class="town-selector-modal-content">
-        <p class="cart-attribute__field">
-          <label for="city">Región</label>
-          <select id="select-city" name="[shipping_address][city]">
-            <option value="">Selecciona tu Región</option>
-            <option value="AP">Arica y Parinacota</option>
-            <option value="TA">Tarapacá</option>
-            <option value="AN">Antofagasta</option>
-            <option value="AT">Atacama</option>
-            <option value="CO">Coquimbo</option>
-            <option value="VS">Valparaí&shy;so</option>
-            <option value="RM">Región Metropolitana</option>
-            <option value="LI">O'Higgins</option>
-            <option value="ML">Maule</option>
-            <option value="NB">Ñuble</option>
-            <option value="BI">Biobio</option>
-            <option value="AR">Araucanía</option>
-            <option value="LR">Los Rí&shy;os</option>
-            <option value="LL">Los Lagos</option>
-            <option value="AI">Aysén</option>
-            <option value="MA">Magallanes</option>
-          </select>
-        </p>
-        <p class="cart-attribute__field">
-          <label for="town">Comuna</label>
-          <select id="select-town" name="[shipping_address][province]">
-            <option value="">Selecciona tu Comuna</option>
-          </select>
-        </p>
+  {% if isShippingEnabled %}
+    <div class="comunas">
+      <h5>Dirección de envío</h5>
+      <p class="alert">
+        Debes seleccionar tu comuna para continuar
+      </p>
+      <div class="town-selector-modal">
+        <div class="town-selector-modal-content">
+          <p class="cart-attribute__field">
+            <label for="city">Región</label>
+            <select id="select-city" name="[shipping_address][city]">
+              <option value="">Selecciona tu Región</option>
+              <option value="AP">Arica y Parinacota</option>
+              <option value="TA">Tarapacá</option>
+              <option value="AN">Antofagasta</option>
+              <option value="AT">Atacama</option>
+              <option value="CO">Coquimbo</option>
+              <option value="VS">Valparaí&shy;so</option>
+              <option value="RM">Región Metropolitana</option>
+              <option value="LI">O'Higgins</option>
+              <option value="ML">Maule</option>
+              <option value="NB">Ñuble</option>
+              <option value="BI">Biobio</option>
+              <option value="AR">Araucanía</option>
+              <option value="LR">Los Rí&shy;os</option>
+              <option value="LL">Los Lagos</option>
+              <option value="AI">Aysén</option>
+              <option value="MA">Magallanes</option>
+            </select>
+          </p>
+          <p class="cart-attribute__field">
+            <label for="town">Comuna</label>
+            <select id="select-town" name="[shipping_address][province]">
+              <option value="">Selecciona tu Comuna</option>
+            </select>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 
-  <div class="shipping_costs">
-    <p>Costos de despacho:</p>
-    <p class="shipping_costs_wrapper"></p>
-  </div>
+  {% if isShippingCostEnabled %}
+    <div class="shipping_costs">
+      <p>Costos de despacho:</p>
+      <p class="shipping_costs_wrapper"></p>
+    </div>
+  {% endif %}
 
-  <div class="tos">
-    <p class="cart-attribute__field">
-      <label for="city"><input type="checkbox" required> Estoy de acuerdo con los Términos y condiciones <a
-          href="/pages/politicas-de-envio" target="_blank">Mostrar Términos</a></label>
-    </p>
-  </div>
+  {% if isTosEnabled %}
+    <div class="tos">
+      <p class="cart-attribute__field">
+        <label for="city"><input type="checkbox" required> Estoy de acuerdo con los Términos y condiciones <a
+            href="/pages/politicas-de-envio" target="_blank">Mostrar Términos</a></label>
+      </p>
+    </div>
+  {% endif %}
 
   <!--
     <div class="submit">
@@ -140,12 +146,24 @@
 
   .billing-menu {
     display: {%- if showBillingMenu -%}block {%- else -%}none {%- endif -%};
+    margin-top: {{ labelMarginTop }};
   }
 
   .rut-field,
   .razon-field {
     color: #3d4246;
     font-size: 16px;
+  }
+
+  .cart-attribute__field select, .cart-attribute__field input[type=text]
+  {
+    color: {{inputTextColor}}!important;
+    border-radius: {{ inputBorderRadius }}px !important;
+    padding: {{ inputPadding }}!important;
+  }
+
+  .cart-attribute__field input[type=text]::placeholder {
+    color: {{ inputPlaceHolderTextColor }};
   }
 
   .razon-field {
@@ -175,6 +193,15 @@
     margin-bottom: 50px;
   }
 
+  .pre-check h5 {
+    margin-bottom: {{ labelMarginBottom }};
+  }
+
+  .pre-check [type=radio] {
+    width: {{ radioButtonWidth }};
+    height: {{ radioButtonHeight }};
+  }
+
   @media only screen and (max-width: 1000px) {
     .pre-check {
       float: none;
@@ -189,7 +216,7 @@
   }
 
   .cart-attribute__field {
-    margin-top: 5px;
+    margin: {{ inputMargin }};
   }
 
   .cart-attribute__field select,
@@ -264,7 +291,7 @@
     });
   }, 500);
 
-  const dom_rut = document.getElementById("rut");
+  var dom_rut = document.getElementById("rut");
 
   dom_rut.addEventListener(
     'input', function () {
